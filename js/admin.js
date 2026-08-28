@@ -16,6 +16,7 @@
 
   const searchEl = document.getElementById('search');
   const refreshBtn = document.getElementById('refresh-btn');
+  const clearClaimedBtn = document.getElementById('clear-claimed-btn');
   const entriesBody = document.getElementById('entries-body');
 
   const prizesBody = document.getElementById('prizes-body');
@@ -94,9 +95,25 @@
         <td>${e.claimed ? '<span class="badge claimed">Claimed</span>' : '<span class="badge pending">Pending</span>'}</td>
         <td>${escapeHtml(e.prize || '—')}</td>
         <td>${claimedAt}</td>
+        <td><button type="button" class="row-delete-btn" title="Delete">✕</button></td>
       `;
+      tr.querySelector('.row-delete-btn').addEventListener('click', () => deleteEntry(e.phone));
       entriesBody.appendChild(tr);
     });
+  }
+
+  async function deleteEntry(phone) {
+    if (!confirm(`Delete ${phone} from the list? This can't be undone.`)) return;
+    try {
+      await adminFetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      });
+      loadEntries();
+    } catch (err) {
+      // showLogin already handled the 401 case
+    }
   }
 
   function escapeHtml(str) {
@@ -120,6 +137,22 @@
   }
 
   refreshBtn.addEventListener('click', loadEntries);
+
+  clearClaimedBtn.addEventListener('click', async () => {
+    if (!confirm('Delete every customer marked "Claimed"? This can\'t be undone.')) return;
+    try {
+      const res = await adminFetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clearClaimed: true }),
+      });
+      const data = await res.json();
+      alert(`Deleted ${data.deleted} claimed customer(s).`);
+      loadEntries();
+    } catch (err) {
+      // showLogin already handled the 401 case
+    }
+  });
 
   searchEl.addEventListener('input', () => {
     const q = searchEl.value.trim().toLowerCase();
