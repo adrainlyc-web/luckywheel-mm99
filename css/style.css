@@ -185,3 +185,24 @@ h1 {
   color: var(--muted);
   font-weight: 500;
 }
+
+.hidden {
+  display: none !important;
+}
+
+.claim-link {
+  display: block;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--accent-2), var(--btn-to));
+  transition: transform 0.15s ease;
+}
+
+.claim-link:hover {
+  transform: translateY(-1px);
+}

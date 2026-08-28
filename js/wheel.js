@@ -1,9 +1,12 @@
 (function () {
+  const CLAIM_URL = 'https://mm99.one';
+
   const wheelEl = document.getElementById('wheel');
   const formEl = document.getElementById('claim-form');
   const phoneEl = document.getElementById('phone');
   const spinBtn = document.getElementById('spin-btn');
   const messageEl = document.getElementById('message');
+  const claimLinkEl = document.getElementById('claim-link');
 
   let prizes = [];
   let currentRotation = 0;
@@ -12,6 +15,11 @@
   function setMessage(text, type) {
     messageEl.textContent = text;
     messageEl.className = 'message' + (type ? ' ' + type : '');
+  }
+
+  function showClaimButton() {
+    claimLinkEl.href = CLAIM_URL;
+    claimLinkEl.classList.remove('hidden');
   }
 
   function buildWheel(list) {
@@ -83,6 +91,7 @@
       if (data.status === 'already_claimed') {
         alreadySpun = true;
         setMessage(`You've already claimed your prize: ${data.prize}. Each phone number can only claim once.`, 'info');
+        showClaimButton();
         return;
       }
 
@@ -90,7 +99,8 @@
         alreadySpun = true;
         spinTo(data.prizeIndex);
         setTimeout(() => {
-          setMessage(`🎉 You won: ${data.prize}! Show this screen to claim your bonus.`, 'success');
+          setMessage(`🎉 You won: ${data.prize}! Tap below to claim your bonus.`, 'success');
+          showClaimButton();
         }, 4300);
         return;
       }
