@@ -12,6 +12,12 @@ module.exports = async (req, res) => {
 
   const body = req.body || {};
 
+  if (body.all) {
+    const result = await query('DELETE FROM entries RETURNING phone');
+    res.status(200).json({ deleted: result.rows.length });
+    return;
+  }
+
   if (body.clearClaimed) {
     const result = await query('DELETE FROM entries WHERE claimed = TRUE RETURNING phone');
     res.status(200).json({ deleted: result.rows.length });

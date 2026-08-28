@@ -17,6 +17,7 @@
   const searchEl = document.getElementById('search');
   const refreshBtn = document.getElementById('refresh-btn');
   const clearClaimedBtn = document.getElementById('clear-claimed-btn');
+  const clearAllBtn = document.getElementById('clear-all-btn');
   const entriesBody = document.getElementById('entries-body');
 
   const prizesBody = document.getElementById('prizes-body');
@@ -148,6 +149,23 @@
       });
       const data = await res.json();
       alert(`Deleted ${data.deleted} claimed customer(s).`);
+      loadEntries();
+    } catch (err) {
+      // showLogin already handled the 401 case
+    }
+  });
+
+  clearAllBtn.addEventListener('click', async () => {
+    if (!confirm('Delete EVERY customer on the list — claimed AND pending? This can\'t be undone.')) return;
+    if (!confirm('Are you sure? This wipes the entire customer list.')) return;
+    try {
+      const res = await adminFetch('/api/admin/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ all: true }),
+      });
+      const data = await res.json();
+      alert(`Deleted ${data.deleted} customer(s).`);
       loadEntries();
     } catch (err) {
       // showLogin already handled the 401 case
