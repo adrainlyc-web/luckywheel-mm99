@@ -1,0 +1,9 @@
+{
+  "name": "lucky-wheel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lucky Wheel claim page + admin dashboard for tracking customer bonus claims.",
+  "dependencies": {
+    "pg": "^8.11.3"
+  }
+}

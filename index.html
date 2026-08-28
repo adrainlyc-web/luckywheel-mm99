@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM99 Lucky Wheel — Claim Your Bonus</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main class="page">
+  <div class="card">
+    <img src="images/logo.png" alt="MM99" class="brand-logo">
+    <h1>Lucky Wheel</h1>
+    <p class="subtitle">Enter your phone number to spin and claim your bonus.</p>
+
+    <div class="wheel-wrap">
+      <div class="pointer"></div>
+      <div class="wheel" id="wheel"></div>
+    </div>
+
+    <form id="claim-form" class="claim-form">
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Your phone number"
+        autocomplete="tel"
+        required
+      >
+      <button type="submit" id="spin-btn">Spin to Claim</button>
+    </form>
+
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+  </div>
+</main>
+
+<script src="js/wheel.js"></script>
+</body>
+</html>

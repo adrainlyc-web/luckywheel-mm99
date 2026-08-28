@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM99 Lucky Wheel — Admin</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div id="login-screen" class="login-screen">
+  <form id="login-form" class="login-card">
+    <h1>🔒 Admin Login</h1>
+    <input type="password" id="password" placeholder="Admin password" required autofocus>
+    <button type="submit">Log In</button>
+    <div id="login-error" class="error-text"></div>
+  </form>
+</div>
+
+<div id="dashboard" class="dashboard hidden">
+  <header class="dash-header">
+    <h1><img src="images/logo.png" alt="MM99" class="header-logo"> Lucky Wheel — Admin</h1>
+    <button id="logout-btn" class="btn-secondary">Log Out</button>
+  </header>
+
+  <section class="stats-row">
+    <div class="stat-box">
+      <div class="stat-number" id="stat-total">0</div>
+      <div class="stat-label">Total Eligible</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="stat-claimed">0</div>
+      <div class="stat-label">Claimed</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" id="stat-pending">0</div>
+      <div class="stat-label">Not Yet Claimed</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Prize Settings</h2>
+    <p class="hint">
+      Set each prize's name, wheel color, and win rate. Win rate is relative — e.g. if one prize
+      has weight 50 and another has weight 5, the first is 10x more likely. Percentages update as you type.
+    </p>
+    <div class="table-wrap">
+      <table id="prizes-table">
+        <thead>
+          <tr>
+            <th>Prize Name</th>
+            <th>Color</th>
+            <th>Win Weight</th>
+            <th>Chance</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="prizes-body"></tbody>
+      </table>
+    </div>
+    <div class="panel-actions">
+      <button id="add-prize-btn" class="btn-secondary">+ Add Prize</button>
+      <button id="save-prizes-btn" class="btn-primary">Save Prize Settings</button>
+      <span id="prizes-result" class="upload-result"></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Add Eligible Customers</h2>
+    <p class="hint">
+      Paste one customer per line, as <code>name, phone</code> (name is optional — <code>phone</code> alone also works).
+      Adding a phone that's already in the list is safe and won't reset an existing claim.
+    </p>
+    <textarea id="upload-text" rows="6" placeholder="John Doe, 71234567&#10;72345678"></textarea>
+    <div class="panel-actions">
+      <button id="upload-btn" class="btn-primary">Add to List</button>
+      <span id="upload-result" class="upload-result"></span>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header-row">
+      <h2>Customers</h2>
+      <input type="text" id="search" placeholder="Search name or phone…">
+      <button id="refresh-btn" class="btn-secondary">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table id="entries-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Prize</th>
+            <th>Claimed At</th>
+          </tr>
+        </thead>
+        <tbody id="entries-body"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>
