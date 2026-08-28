@@ -90,7 +90,7 @@
 
       if (data.status === 'already_claimed') {
         alreadySpun = true;
-        setMessage(`You've already claimed your prize: ${data.prize}. Each phone number can only claim once.`, 'info');
+        setMessage(`You've already claimed your prize: ${data.prize}. Screenshot this page and contact our LiveChat to claim it.`, 'info');
         showClaimButton();
         return;
       }
@@ -99,7 +99,7 @@
         alreadySpun = true;
         spinTo(data.prizeIndex);
         setTimeout(() => {
-          setMessage(`🎉 You won: ${data.prize}! Tap below to claim your bonus.`, 'success');
+          setMessage(`🎉 You won: ${data.prize}! Screenshot this page and contact our LiveChat to claim your bonus.`, 'success');
           showClaimButton();
         }, 4300);
         return;
