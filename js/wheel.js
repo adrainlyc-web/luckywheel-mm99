@@ -10,6 +10,7 @@
   const spinBtn = document.getElementById('spin-btn');
   const messageEl = document.getElementById('message');
   const claimLinkEl = document.getElementById('claim-link');
+  const helpLinkEl = document.getElementById('help-link');
 
   let prizes = [];
   let currentRotation = 0;
@@ -24,6 +25,8 @@
     claimLinkEl.href = CLAIM_URL;
     claimLinkEl.classList.remove('hidden');
   }
+
+  helpLinkEl.href = CLAIM_URL;
 
   function buildWheel(list) {
     const n = list.length;
